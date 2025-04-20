@@ -55,9 +55,10 @@ export default {
 				},
 				netflix: {
 					red: "#E50914",
-					black: "#141414",
+					black: "#000000",
+					darkgray: "#141414",
 					gray: "#808080",
-					darkgray: "#333333",
+					lightgray: "#e5e5e5",
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',

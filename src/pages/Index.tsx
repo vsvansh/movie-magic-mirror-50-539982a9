@@ -4,23 +4,39 @@ import HeroBanner from '@/components/HeroBanner';
 import ContentRow from '@/components/ContentRow';
 import Footer from '@/components/Footer';
 import { categories } from '@/utils/movieData';
+import BillboardSection from '@/components/BillboardSection';
+import FAQSection from '@/components/FAQSection';
+import DevicesSection from '@/components/DevicesSection';
+import OfflineSection from '@/components/OfflineSection';
+import KidsSection from '@/components/KidsSection';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-netflix-black overflow-x-hidden">
+    <div className="min-h-screen bg-netflix-black text-white overflow-x-hidden">
       <NavBar />
       
-      <main className="pt-0">
-        <HeroBanner />
+      <main>
+        {/* Hero Banner with Sign Up Form */}
+        <BillboardSection />
         
-        <div className="pb-10">
-          {categories.slice(0, 6).map((category, index) => (
-            <ContentRow 
-              key={category} 
-              title={category} 
-              large={index === 0} 
-            />
-          ))}
+        {/* TV Shows Section */}
+        <div className="border-t-8 border-[#232323]">
+          <DevicesSection />
+        </div>
+        
+        {/* Download & Watch Offline Section */}
+        <div className="border-t-8 border-[#232323]">
+          <OfflineSection />
+        </div>
+        
+        {/* Watch Everywhere Section */}
+        <div className="border-t-8 border-[#232323]">
+          <KidsSection />
+        </div>
+        
+        {/* FAQ Section */}
+        <div className="border-t-8 border-[#232323]">
+          <FAQSection />
         </div>
       </main>
       

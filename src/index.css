@@ -57,48 +57,30 @@
 }
 
 @layer components {
-  .content-row {
-    @apply px-4 md:px-8 lg:px-12 overflow-x-hidden;
+  /* Resets */
+  
+  /* Netflix-specific styling */
+  .netflix-container {
+    @apply px-4 md:px-8 lg:px-16;
   }
   
-  .content-container {
-    @apply flex gap-2 md:gap-4 overflow-x-auto pb-4 pt-2 snap-x;
-    scrollbar-width: none;
+  .netflix-section {
+    @apply py-12 md:py-24;
   }
   
-  .content-container::-webkit-scrollbar {
-    display: none;
+  .netflix-title {
+    @apply text-3xl md:text-5xl font-bold;
   }
   
-  .nav-link {
-    @apply text-sm text-gray-300 hover:text-white transition-colors;
+  .netflix-subtitle {
+    @apply text-lg md:text-2xl text-gray-300;
   }
   
-  .movie-card {
-    @apply relative overflow-hidden rounded-md flex-shrink-0 snap-start transition-all duration-300 ease-out transform;
-    width: 220px;
-    height: 130px;
+  .netflix-button {
+    @apply bg-netflix-red hover:bg-[#f40612] text-white font-medium;
   }
   
-  .movie-card-large {
-    @apply relative overflow-hidden rounded-md flex-shrink-0 snap-start transition-all duration-300 ease-out transform;
-    width: 280px;
-    height: 160px;
-  }
-  
-  .movie-card:hover, .movie-card-large:hover {
-    @apply z-10 scale-105 shadow-xl;
-  }
-  
-  @media (max-width: 768px) {
-    .movie-card {
-      width: 180px;
-      height: 105px;
-    }
-    
-    .movie-card-large {
-      width: 240px;
-      height: 140px;
-    }
+  .netflix-input {
+    @apply bg-black bg-opacity-70 border border-[#333] text-white;
   }
 }
