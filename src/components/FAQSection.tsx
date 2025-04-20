@@ -1,11 +1,13 @@
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ChevronRight, Plus, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [email, setEmail] = useState("");
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
   
   const faqs = [
     {
@@ -35,51 +37,63 @@ const FAQSection = () => {
   };
   
   return (
-    <div className="py-12 md:py-20 px-4 md:px-8 lg:px-0 bg-netflix-black">
+    <div className="py-12 md:py-20 px-4 md:px-8 lg:px-0 bg-netflix-black border-t-8 border-[#232323]">
       <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl md:text-5xl font-bold mb-8">
+        <h2 className="text-3xl md:text-5xl font-bold mb-8 animate-fade-in">
           Frequently Asked Questions
         </h2>
         
-        <div className="mb-8">
+        <div className="mb-8 space-y-2">
           {faqs.map((faq, index) => (
-            <div key={index} className="mb-2">
+            <div key={index} className="transition-all duration-300 hover:bg-[#333]">
               <button 
-                className="w-full bg-[#2D2D2D] hover:bg-[#414141] text-white p-5 text-left flex justify-between items-center transition-colors"
+                className="w-full bg-[#2D2D2D] text-white p-5 text-left flex justify-between items-center transition-colors"
                 onClick={() => toggleFAQ(index)}
               >
                 <span className="text-lg md:text-xl font-medium">{faq.question}</span>
-                {openIndex === index ? (
-                  <X size={24} />
-                ) : (
+                <span className="transition-transform duration-300" style={{ transform: openIndex === index ? 'rotate(45deg)' : 'rotate(0deg)' }}>
                   <Plus size={24} />
-                )}
+                </span>
               </button>
               
-              {openIndex === index && (
-                <div className="bg-[#2D2D2D] mt-px p-6 text-lg md:text-xl">
+              <div 
+                ref={el => contentRefs.current[index] = el}
+                className={`bg-[#2D2D2D] overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}
+              >
+                <div className="p-6 text-lg md:text-xl">
                   {faq.answer}
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
         
-        <div className="mt-12">
+        <div className="mt-12 animate-fade-in" style={{ animationDelay: "0.3s" }}>
           <p className="text-lg md:text-xl mb-5">
             Ready to watch? Enter your email to create or restart your membership.
           </p>
           
           <div className="flex flex-col md:flex-row gap-3 justify-center mt-6 max-w-[700px] mx-auto">
-            <div className="md:flex-1">
+            <div className="md:flex-1 relative">
               <Input 
                 type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email address" 
-                className="h-14 bg-black bg-opacity-70 border border-[#333] text-white w-full"
+                className="h-14 bg-black bg-opacity-70 border border-[#333] text-white w-full transition-all duration-300 focus:border-white"
               />
+              {email && (
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                  {/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? (
+                    <span className="text-green-500">✓</span>
+                  ) : (
+                    <span className="text-red-500">✗</span>
+                  )}
+                </div>
+              )}
             </div>
             <Button 
-              className="h-14 bg-netflix-red hover:bg-[#f40612] text-lg font-medium px-6"
+              className="h-14 bg-netflix-red hover:bg-[#f40612] text-lg font-medium px-6 transition-transform duration-200 hover:scale-105"
             >
               Get Started <ChevronRight size={20} />
             </Button>
